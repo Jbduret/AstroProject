@@ -1,3 +1,20 @@
+---
+const pageTitle = "À propos de moi";
+
+const identity = {
+  firstName: "Jean-Baptiste",
+  country: "France",
+  occupation: "Ingénieur fullstack",
+  hobbies: ["rugby", "jeux vidéo", "théatre", "lecture"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "Astro"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+---
+
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -5,15 +22,22 @@
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>{pageTitle}</title>
 	</head>
 	<body>
-        <a href="/">Accueil</a>
-        <a href="/about/">À propos</a>
+        <a href="/">Front page</a>
+        <a href="/about/">About</a>
         <a href="/blog/">Blog</a>
 
-		<h1>About me</h1>
-        <h2>My name is John Doe, and I am a web developer with a passion for creating beautiful and functional websites.</h2>
-        <p>I have experience in various web technologies, including HTML, CSS, JavaScript, and modern frameworks like React and Vue. In my free time, I enjoy contributing to open-source projects and exploring new technologies in the web development space.</p>
+		<h1>{pageTitle}</h1>
+        <h2>My name is {identity.firstName}, and I am a {identity.occupation} from {identity.country}.</h2>
+        <p>I have experience in various web technologies, including:</p>
+        <ul>
+            {skills.map((skill) => <li>{skill}</li>)}
+        </ul>
+        <p>In my free time, I enjoy {identity.hobbies.join(", ")}.</p>
+        {happy && <p>Je suis heureux d'apprendre Astro !</p>}
+        {finished && <p>J'ai terminé ce tutoriel !</p>}
+        {goal === 3 ? <p>Mon objectif est de terminer en 3 jours.</p> : <p>Mon objectif n'est pas de 3 jours.</p>}
 	</body>
 </html>
