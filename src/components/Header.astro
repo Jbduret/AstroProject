@@ -6,7 +6,7 @@ import Container from "./Container.astro";
   <header id="header">
     <div class="content">
       <h1>
-      <span>Hi, I am Astra.</span>
+      <span>Hi, I am Jean-Baptiste.</span>
         <span><span class="accent">Full-stack</span> Specialist!</span>
       </h1>
       <p class="description">
@@ -20,11 +20,20 @@ import Container from "./Container.astro";
          <ButtonLink href="/resume.pdf" text="Download resume" isDownload={true}/>
       </div>
     </div>
-    <img src="/images/me.png" />
+    <img class="profile-image" src="/images/me.jpg" alt="Astra profile" />
   </header>
 </Container>
 
 <style>
+  .profile-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
    #header {
     display: grid;
     grid-template-columns: 540px 1fr;
@@ -73,5 +82,4 @@ import Container from "./Container.astro";
     }
   }
 
- 
 </style>
