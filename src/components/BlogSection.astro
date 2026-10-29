@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHeader from './SectionHeader.astro';
+import Section from './Section.astro';
+import HorizontalSeparator from './HorizontalSeparator.astro';
+import ButtonLink from './ButtonLink.astro';
+
+const posts = await getCollection('blog');
+const heading = 'Blog';
+const cta = {text: 'View blog', href:"/blog"};
+---
+
+<Section>
+  	<SectionHeader heading={heading} cta={cta}/>
+  	{
+		posts.map(post => (
+  	  		<div class="blog-card">
+  	  		  	<h3>{post.data.title}</h3>
+  	  		  	<div class="metadata">
+  	  		    	<p class="date">{post.data.date}</p>
+  	  		    	<span class="vertical-separator"></span>
+  	  		    	<p class="tags">{post.data.tags.join(", ")}</p>
+  	  		  	</div>
+  	  		  	<p class="description">{post.data.description}</p>
+  	  		  	<ButtonLink
+  	  		    	href={`/blog/${post.id}`}
+  	  		    	text="Read article"
+  	  		    	variant="secondary"
+  	  		  	/>
+  	  		</div>
+  	  		<HorizontalSeparator/>
+		))
+	}
+</Section>
+<style>
+  .blog-card {
+    h3 {
+    	margin-bottom: 14px;
+      	font-size: 30px;
+    }
+
+    .metadata {
+      	display: flex;
+      	gap: 30px;
+      	align-items: center;
+      	margin-bottom: 20px;
+
+      	.vertical-separator {
+      	  	width: 1px;
+      	  	height: 30px;
+      	  	background-color: var(--dark);
+      	}
+
+      	.date {
+      	  	font-size: 20px;
+      	}
+
+      	.tags {
+      	  	font-size: 20px;
+      	  	color: var(--light);
+      	}
+
+      	@media screen and (max-width: 600px) {
+      	  	& {
+      	    	flex-direction: column;
+      	    	gap: 2px;
+      	    	align-items: start;
+      	    	margin-bottom: 10px;
+      	    	margin-top: 16px;
+
+      	    	* {
+      	      	margin: 0;
+      	    	}
+
+      	    	.vertical-separator {
+      	      		height: 0;
+      	      		display: none;
+      	    	}
+      	  	}
+      	}
+    }
+    .description {
+      	font-size: 16px;
+      	color: var(--dark);
+      	margin-top: 0px;
+      	margin-bottom: 40px;
+    }
+  }
+</style>
